@@ -1,0 +1,28 @@
+#!/bin/bash
+PIPEWIRE_QUANTUM="1024/48000"
+
+#MAIN FUNCTION
+function setQuantum() {
+    #GETTING BUFFER SIZE AND SAMPLE RATE VARIABLES
+    BUFFER_SIZE=$(echo $PIPEWIRE_QUANTUM | cut -d "/" -f 1)
+    SAMPLE_RATE=$(echo $PIPEWIRE_QUANTUM | cut -d "/" -f 2)
+
+    #SETTING PIPEWIRE QUANTUM
+    pw-metadata -n settings 0 clock.force-quantum $BUFFER_SIZE
+    pw-metadata -n settings 0 clock.force-rate $SAMPLE_RATE
+
+    #SERVICE MESSAGING
+    echo "INFO: $2"
+    echo "INFO: BUFFER SIZE - $BUFFER_SIZE"
+    echo "INFO: SAMPLE RATE - $SAMPLE_RATE"   
+}
+
+#CONDITIONAL CHECKING
+if [ $# -eq 0 ]
+    then 
+        setQuantum $PIPEWIRE_QUANTUM "Setting default PipeWire Quantum values ..."
+    else
+        PIPEWIRE_QUANTUM=$1
+        setQuantum $PIPEWIRE_QUANTUM "Setting custom PipeWire Quantum values ..."
+fi
+
