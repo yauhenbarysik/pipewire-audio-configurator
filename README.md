@@ -4,8 +4,8 @@ Simple bash script for changing ***Buffer Size*** and ***Sample Rate*** for your
 # Pre-Requisites
 Add your user to ***audio*** and ***pipewire*** groups:
 
->sudo usermod -a -G audio your_username
->sudo usermod -a -G pipewire your_username
+></br>sudo usermod -a -G audio your_username
+></br>sudo usermod -a -G pipewire your_username
 
 **IMPORTANT:** Restart your machine afterwards
 
